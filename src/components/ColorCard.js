@@ -1,11 +1,22 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 export default function ColorCard({ color, name }) {
+  // const [clipText, setClipText] = useState("");
+
+  function setClipText() {
+    navigator.clipboard.writeText(color).then((text) => getClipText());
+  }
+
+  function getClipText() {
+    navigator.clipboard.readText().then((text) => console.log(text));
+  }
+
   return (
     <StyledCard color={color}>
       <StyledDeleteButton>X</StyledDeleteButton>
       <StyledTitle>{name}</StyledTitle>
-      <StyledHexButton>{color}</StyledHexButton>
+      <StyledHexButton onClick={setClipText}>{color}</StyledHexButton>
     </StyledCard>
   );
 }
