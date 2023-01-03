@@ -25,8 +25,8 @@ const StyledCard = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 120px;
-  min-height: 150px;
+  min-width: 130px;
+  min-height: 140px;
   background-color: ${({ color }) => color};
   border: 2px solid black;
   border-radius: 5px;
@@ -42,6 +42,12 @@ const StyledTitle = styled.h2`
 
 const Button = styled.button`
   border: 2px solid black;
+  background-color: #ffffff;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #dddde9;
+  }
 `;
 
 const StyledHexButton = styled(Button)`
@@ -49,12 +55,13 @@ const StyledHexButton = styled(Button)`
   margin: 0 auto;
   padding: 5px 10px;
   border-radius: 5px;
+  font-weight: 700;
 `;
 
 const StyledDeleteButton = styled(Button)`
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 5px;
+  top: 5px;
   color: black;
   font-size: 12px;
   font-weight: 700;
