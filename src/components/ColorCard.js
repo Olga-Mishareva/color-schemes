@@ -19,10 +19,7 @@ export default function ColorCard({
   }
 
   function handleChange(e) {
-    console.log(e.target.value);
-    // navigator.clipboard.readText().then((text) => console.log(text));
-    // setHexColor(e.target.value);
-    onColorChange(e.target.value);
+    onColorChange(id, e.target.value);
   }
 
   return (

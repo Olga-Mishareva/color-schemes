@@ -8,8 +8,6 @@ import { COLORS } from "../utils/colorsDb";
 function App() {
   const [cardList, setCardList] = useState(COLORS);
 
-  useEffect(() => {}, [cardList]);
-
   function handleAddColor(newColor) {
     setCardList([
       { id: uid(), colorCode: newColor, colorName: "???" },
@@ -17,26 +15,11 @@ function App() {
     ]);
   }
 
-  function handleChangeColor(newColor) {
-    // let prevColor;
-    navigator.clipboard.readText().then((text) => {
-      // let id;
-      const id = cardList.forEach(
-        (card) => {
-          if (text !== card.colorCode) {
-            console.log(card.id);
-            return;
-          }
-          return card.id;
-        }
-        // (card.colorCode = newColor) : card.colorCode
-      );
-      console.log(id);
-      console.log(text);
-      // prevColor = text;
-    });
-
-    console.log(cardList);
+  function handleChangeColor(cardId, newColor) {
+    const newCardList = cardList.map((card) =>
+      card.id === cardId ? { ...card, colorCode: newColor } : card
+    );
+    setCardList(newCardList);
   }
 
   function handleDeleteCard(cardId) {
@@ -46,7 +29,7 @@ function App() {
     setCardList(newCardList);
   }
 
-  console.log(cardList);
+  // console.log(cardList);
 
   return (
     <>
