@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import StyledCard from "./ColorCard";
 // import { COLORS } from "../utils/colorsDb";
 
-export default function CardList({ cardList }) {
+export default function CardList({ cardList, onColorChange, onRemove }) {
+  // useEffect(() => {}, [cardList]);
+
   return (
     <StyledList>
       {cardList.map((color) => {
@@ -12,6 +14,9 @@ export default function CardList({ cardList }) {
             key={color.id}
             color={color.colorCode}
             name={color.colorName}
+            id={color.id}
+            onColorChange={onColorChange}
+            onRemove={onRemove}
           />
         );
       })}
