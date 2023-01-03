@@ -1,22 +1,37 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function ColorCard({ color, name }) {
-  // const [clipText, setClipText] = useState("");
+export default function ColorCard({
+  color,
+  name,
+  id,
+  onColorChange,
+  onRemove,
+}) {
+  // const [hexColor, setHexColor] = useState("");
 
   function setClipText() {
     navigator.clipboard.writeText(color).then((text) => getClipText());
   }
 
   function getClipText() {
-    navigator.clipboard.readText().then((text) => console.log(text));
+    // navigator.clipboard.readText().then((text) => console.log(text));
+  }
+
+  function handleChange(e) {
+    onColorChange(id, e.target.value);
   }
 
   return (
     <StyledCard color={color}>
-      <StyledDeleteButton>X</StyledDeleteButton>
+      <StyledDeleteButton onClick={() => onRemove(id)}>X</StyledDeleteButton>
       <StyledTitle>{name}</StyledTitle>
-      <StyledHexButton onClick={setClipText}>{color}</StyledHexButton>
+      <StyledHexInput
+        onClick={setClipText}
+        onChange={handleChange}
+        type="text"
+        defaultValue={color}
+      />
     </StyledCard>
   );
 }
@@ -50,13 +65,23 @@ const Button = styled.button`
   }
 `;
 
-const StyledHexButton = styled(Button)`
-  min-width: 50px;
+const StyledHexInput = styled.input`
+  width: 70px;
   margin: 0 auto;
   padding: 5px 10px;
   border-radius: 5px;
   font-weight: 700;
+  border: 2px solid black;
+  background-color: #ffffff;
 `;
+
+// const StyledHexButton = styled(Button)`
+//   min-width: 50px;
+//   margin: 0 auto;
+//   padding: 5px 10px;
+//   border-radius: 5px;
+//   font-weight: 700;
+// `;
 
 const StyledDeleteButton = styled(Button)`
   position: absolute;

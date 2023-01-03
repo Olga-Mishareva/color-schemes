@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { uid } from "uid";
 import CardList from "./CardList";
@@ -15,6 +15,20 @@ function App() {
     ]);
   }
 
+  function handleChangeColor(cardId, newColor) {
+    const newCardList = cardList.map((card) =>
+      card.id === cardId ? { ...card, colorCode: newColor } : card
+    );
+    setCardList(newCardList);
+  }
+
+  function handleDeleteCard(cardId) {
+    const newCardList = cardList.filter((card) =>
+      card.id !== cardId ? card : null
+    );
+    setCardList(newCardList);
+  }
+
   // console.log(cardList);
 
   return (
@@ -22,7 +36,11 @@ function App() {
       <header></header>
       <StyledMain>
         <Form onSubmit={handleAddColor} />
-        <CardList cardList={cardList} />
+        <CardList
+          cardList={cardList}
+          onColorChange={handleChangeColor}
+          onRemove={handleDeleteCard}
+        />
       </StyledMain>
       <footer></footer>
     </>
